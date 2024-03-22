@@ -1,24 +1,32 @@
 package com.semillero.solicitudes.services;
 
-import com.semillero.solicitudes.persistence.SolicitudRepository;
+import com.semillero.solicitudes.persistence.entities.EmpleadosEntity;
 import com.semillero.solicitudes.persistence.entities.SolicitudEntity;
-import com.semillero.solicitudes.services.interfaces.ISolicitud;
+import com.semillero.solicitudes.persistence.repository.SolicitudRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class SolicitudService implements ISolicitud {
-    SolicitudRepository solicitudRepository;
-
+public class SolicitudService {
     @Autowired
-    public SolicitudService (SolicitudRepository solicitudRepository) {
-        this.solicitudRepository = solicitudRepository;
+    private SolicitudRepository solicitudRepository;
+
+    public List<SolicitudEntity> getSolicitud() {
+        return solicitudRepository.findAllByOrderByFechaCreacionDesc();
     }
 
-    @Override
-    public List<SolicitudEntity> getAll() {
-        return solicitudRepository.findAll();
+    public SolicitudEntity createSolicitud(SolicitudEntity solicitud) {
+        if (solicitud.getIdSolicitud() == 1){
+            solicitud.setEstado("aprobado");
+        }else{
+
+        }
+        return solicitudRepository.save(solicitud);
     }
+
+
 }
+
