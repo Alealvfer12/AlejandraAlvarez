@@ -2,7 +2,9 @@ package com.semillero.solicitudes.services;
 
 import com.semillero.solicitudes.persistence.entities.EmpleadosEntity;
 import com.semillero.solicitudes.persistence.repository.EmpleadosRepository;
+import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -10,11 +12,11 @@ import java.util.List;
 
 @Service
 public class EmpleadosService {
-    @Autowired
+    @Resource
     private  EmpleadosRepository empleadosRepository;
 
     public ArrayList<EmpleadosEntity> getempleados(){
-        return (ArrayList<EmpleadosEntity>) empleadosRepository.findAll();
+        return (ArrayList<EmpleadosEntity>) getEmpleadosRepository().findAll();
     }
     public EmpleadosEntity createEmpleado(EmpleadosEntity empleado) {
         return empleadosRepository.save(empleado);
@@ -38,4 +40,11 @@ public class EmpleadosService {
         return empleadosEntity;
     }
 
+    public EmpleadosRepository getEmpleadosRepository() {
+        return empleadosRepository;
+    }
+
+    public void setEmpleadosRepository(EmpleadosRepository empleadosRepository) {
+        this.empleadosRepository = empleadosRepository;
+    }
 }

@@ -27,6 +27,8 @@ public class SolicitudService {
         return solicitudRepository.save(solicitud);
     }
 
-
+    public void setSolicitudRepository(SolicitudRepository solicitudRepository) {
+        this.solicitudRepository = solicitudRepository;
+    }
 }
 
